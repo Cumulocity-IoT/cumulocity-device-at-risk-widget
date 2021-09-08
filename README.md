@@ -1,19 +1,13 @@
-# *Devices at Risk Widget*
-
-{{toc}}
-
-## Overview
+# Cumulocity Devices at Risk Widget<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>
 
 This is an Angular 7 widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
-
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
-## Representation
+![deviceatrisk](https://user-images.githubusercontent.com/89508319/132313057-4171c2b0-8252-4fd1-9c3c-d672c7cbb261.PNG)
 
-Devices at Risk Widget / Assets at Risk view 
-
-![](Assets_at_Risk.PNG)
-
+ ## Features
+. Display Assets/Devices: Displays Assets/Devices for give group in Tile/Grid mode. It also supports child devices/assets.
+. Pagination: Configurable Paginations and also option to set default page size.
 
 ## Owners
 
