@@ -8,6 +8,7 @@ One can also see the Availability of those devices and can also view the data bo
 
  ## Features
 •	Display Assets/Devices: Displays Assets/Devices for give group in Tile/Grid mode.
+
 •	It also supports child devices/assets. . Pagination: Configurable Paginations and option to set default page size.
 
 
