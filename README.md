@@ -3,7 +3,8 @@
 This is an Angular 7 widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
-![deviceatrisk](https://user-images.githubusercontent.com/89508319/132313057-4171c2b0-8252-4fd1-9c3c-d672c7cbb261.PNG)
+![device_atrisk](https://user-images.githubusercontent.com/89508319/132515927-02e893de-7eb6-475b-af71-073b000c4bfe.png)
+
 
  ## Features
 . Display Assets/Devices: Displays Assets/Devices for give group in Tile/Grid mode. It also supports child devices/assets.
