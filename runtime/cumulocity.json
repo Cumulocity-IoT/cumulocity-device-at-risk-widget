@@ -1,0 +1,12 @@
+{
+  "name": "Device At Risk Runtime Widget",
+  "contextPath": "device-at-risk-runtime-widget",
+  "key": "device-at-risk-runtime-widget-application-key",
+  "contentSecurityPolicy": "default-src 'self'",
+  "icon": {
+    "class": "fa dlt-c8y-icon-exclamation-circle"
+  },
+  "manifest": {
+    "noAppSwitcher": true
+  }
+}

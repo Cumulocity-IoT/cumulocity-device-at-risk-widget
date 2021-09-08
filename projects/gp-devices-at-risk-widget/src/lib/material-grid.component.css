@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+tr.mat-row{
+    height: 30px;
+}
+.paginatorPosition
+{
+    /* position: absolute; */
+    bottom: 10px;
+    right: 5px;
+}
+.display-text-status-orange{
+    color:orange
+  }
+  .display-text-status-red {
+    color: red
+  }

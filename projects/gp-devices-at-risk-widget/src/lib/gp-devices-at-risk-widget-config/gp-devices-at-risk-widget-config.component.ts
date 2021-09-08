@@ -1,0 +1,64 @@
+import { Component, OnInit, Input, ViewEncapsulation, isDevMode} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { GpDevicesAtRiskWidgetService } from '../gp-devices-at-risk-widget.service';
+export interface DashboardConfig {
+  type?: any;
+  dashboarId?: string;
+  tabGroupID?: string;
+  tabGroup?: boolean;
+}
+@Component({
+  selector: 'lib-gp-devices-at-risk-widget-config',
+  templateUrl: './gp-devices-at-risk-widget-config.component.html',
+  styleUrls: ['./gp-devices-at-risk-widget-config.component.css'],
+  encapsulation: ViewEncapsulation.None
+})
+
+export class GpDevicesAtRiskWidgetConfigComponent implements OnInit {
+  propertiesToDisplay: string[];
+  TableInputs = new FormControl();
+  dashboardList: DashboardConfig[] = [];
+  isExpandedDBS = false;
+  deviceTypes = null;
+  appId = null;
+  constructor(private deviceListService: GpDevicesAtRiskWidgetService) { }
+  @Input() config: any = {};
+  ngOnInit() {
+    this.propertiesToDisplay = ['id', 'name', 'alarms', 'externalid', 'firmware', 'availability'];
+    this.appId = this.deviceListService.getAppId();
+    if (!this.config.dashboardList && this.appId) {
+      const dashboardObj: DashboardConfig = {};
+      dashboardObj.type = 'All';
+      this.dashboardList.push(dashboardObj);
+      this.config.dashboardList = this.dashboardList;
+    }
+    this.getAllDevices();
+    if (!this.config.device) {
+        this.config.device = {};
+      }
+    if (this.config.withTabGroup === undefined) {
+      this.config.withTabGroup = false;
+    }
+  }
+  onColChange() {
+    this.config.tProps = this.TableInputs.value;
+  }
+  private getAllDevices() {
+    const deviceList: any = null;
+    this.deviceListService.getAllDevices(1, deviceList)
+      .then((deviceFound) => {
+        this.deviceTypes = Array.from(new Set(deviceFound.data.map(item => item.type)));
+        this.deviceTypes = this.deviceTypes.filter(n => n);
+      })
+      .catch((err) => {
+        if (isDevMode()) { console.log('+-+- ERROR while getting ALL devices ', err); }
+      });
+  }
+  addNewRecord(currentIndex) {
+    if ((currentIndex + 1) === this.config.dashboardList.length) {
+      const dashboardObj: DashboardConfig = {};
+      dashboardObj.type = 'All';
+      this.config.dashboardList.push(dashboardObj);
+    }
+  }
+}
