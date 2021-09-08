@@ -1,18 +1,15 @@
-# *Devices at Risk Widget*
-
-{{toc}}
-
-## Overview
+# Cumulocity Devices at Risk Widget<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>
 
 This is an Angular 7 widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
-
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
-## Representation
+![device_atrisk](https://user-images.githubusercontent.com/89508319/132515927-02e893de-7eb6-475b-af71-073b000c4bfe.png)
 
-Devices at Risk Widget / Assets at Risk view 
 
-![](Assets_at_Risk.PNG)
+ ## Features
+•	Display Assets/Devices: Displays Assets/Devices for give group in Tile/Grid mode.
+
+•	It also supports child devices/assets. . Pagination: Configurable Paginations and option to set default page size.
 
 
 ## Owners
@@ -42,11 +39,11 @@ Cumulocity 1005.0.3 onward (should also work for an older version of Cumulocity)
     ``` 
 
    ##### Mandatory Library for Widget
-  - Angular CDK version 7.3.7
-    Installation command:  ```npm i @angular/cdk@7.3.7 ``` 
+  - Angular CDK version 8.2.14
+    Installation command:  ```npm i "@angular/cdk": "~8.2.3" ``` 
 
   - Angular Material version 7.3.7
-     Installation command: ```npm i @angular/material@7.3.7 ``` 
+     Installation command: ```npm i "@angular/material": "^8.2.3" ``` 
 
   - Cumulocity Library: 
       Installation command : 
@@ -65,12 +62,12 @@ npm install @c8y/ng1-modules
   2. Make sure to install all pre-specified Mandatory Library under [Prerequisites](https://labcase.softwareag.com/projects/c8y-devices-at-risk/wiki/Wiki#Prerequisites) in your cockpit application.
     So that your application has the following entries in `package.json `.
 ```
-"@angular/cdk": "7.3.7",
-"@angular/material": "7.3.7",
-"core-js": "^2.6.2",
-"@c8y/ngx-components": "^1005.0.3",
-"@c8y/ng1-modules": "^1005.0.3",
-"@c8y/style": "^1005.0.3",
+"@angular/cdk": "~8.2.3",
+"@angular/material": "^8.2.3",
+"core-js": "^2.5.4",
+@c8y/ngx-components": "1010.0.8",
+"@c8y/client": "1010.0.8",
+@c8y/style": "1010.0.8",
  ```
 
 **Note: Even if some of the libraries are available please do install, that will only update the library which is already available with latest changes and also update its dependencies.
