@@ -36,11 +36,11 @@ Cumulocity 1005.0.3 onward (should also work for an older version of Cumulocity)
     ``` 
 
    ##### Mandatory Library for Widget
-  - Angular CDK version 7.3.7
-    Installation command:  ```npm i @angular/cdk@7.3.7 ``` 
+  - Angular CDK version 8.2.14
+    Installation command:  ```npm i "@angular/cdk": "~8.2.3" ``` 
 
   - Angular Material version 7.3.7
-     Installation command: ```npm i @angular/material@7.3.7 ``` 
+     Installation command: ```npm i "@angular/material": "^8.2.3" ``` 
 
   - Cumulocity Library: 
       Installation command : 
@@ -59,12 +59,12 @@ npm install @c8y/ng1-modules
   2. Make sure to install all pre-specified Mandatory Library under [Prerequisites](https://labcase.softwareag.com/projects/c8y-devices-at-risk/wiki/Wiki#Prerequisites) in your cockpit application.
     So that your application has the following entries in `package.json `.
 ```
-"@angular/cdk": "7.3.7",
-"@angular/material": "7.3.7",
-"core-js": "^2.6.2",
-"@c8y/ngx-components": "^1005.0.3",
-"@c8y/ng1-modules": "^1005.0.3",
-"@c8y/style": "^1005.0.3",
+"@angular/cdk": "~8.2.3",
+"@angular/material": "^8.2.3",
+"core-js": "^2.5.4",
+@c8y/ngx-components": "1010.0.8",
+"@c8y/client": "1010.0.8",
+@c8y/style": "1010.0.8",
  ```
 
 **Note: Even if some of the libraries are available please do install, that will only update the library which is already available with latest changes and also update its dependencies.
