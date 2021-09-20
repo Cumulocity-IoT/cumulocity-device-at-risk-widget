@@ -239,7 +239,7 @@ This guide will teach you how to add widget in your existing or new dashboard.
     
 3.  Click  `Add Widget`
     
-4.  Search for  `Device at risk`
+4.  Search for  `Asset at risk`
     
 5.  Select  `Target Assets or Devices`
     
