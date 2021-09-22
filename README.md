@@ -3,7 +3,8 @@
 This is an Angular 8 widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
-![image](https://user-images.githubusercontent.com/89508319/134164210-a8febe93-b8a1-4ee6-874f-288789a4c4f5.png)
+![image](https://user-images.githubusercontent.com/89508319/134283066-0d9f412a-98a1-4c47-bcf6-f6c57f7dd136.png)
+
 
 
  ## Features
