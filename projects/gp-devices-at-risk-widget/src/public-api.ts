@@ -18,6 +18,4 @@
  * Public API Surface of gp-devices-at-risk-widget
  */
 
-export * from './lib/gp-devices-at-risk-widget.service';
-export * from './lib/gp-devices-at-risk-widget.component';
 export * from './lib/gp-devices-at-risk-widget.module';
