@@ -9,7 +9,8 @@ One can also see the Availability of those devices and can also view the data bo
 
  ## Features
  - Display Assets/Devices: Displays Assets/Devices for give group in
-   Tile/Grid mode. 
+   Tile mode.
+ - When you click on the Id it will navigate to that particular dashboard
    
  - It also supports child devices/assets.  
  - Pagination: Configurable Paginations and option to set default page size.
