@@ -41,9 +41,11 @@ One can also see the Availability of those devices and can also view the data bo
 "@angular/material": "^8.2.3"
 
 "@ng-select/ng-select": "^3.7.3"
+
 ```
 
 **Installation Steps For App Builder:**
+
 **Note:**  If you are new to App Builder or not yet downloaded/clone app builder code then please follow  [App builder documentation(Build Instructions)](https://github.com/SoftwareAG/cumulocity-app-builder)  before proceeding further.
 
 1.  Open Your existing App Builder project and install external dependencies by executing below command or install it manually.
