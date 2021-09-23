@@ -261,7 +261,7 @@ Congratulations! Device at risk widget is configured.
     
 -   **Default PageSize  :** Select records per page.
     
--   **Page2 Settings:**  User can select up to 5 fields to display in Page2 of tile. If user selected "Other" as one of the field then one custom field can be configured for display.
+-   **Page2 Settings:**  User can select up to 5 fields to display in Page2 of tile. 
     
 -   **Dashboard Navigation Settings (Application Builder Only):**  This feature is available only in application builder. User can navigate to any other dashboard by providing below details:
     -  **All:**  Select a device type. Navigation will be applied to all the devices/assets of this device/asset to a specific dashboard
