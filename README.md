@@ -254,25 +254,24 @@ Congratulations! Device at risk widget is configured.
 
 
 ## User Guide
-
+Click on Add Widget and select Devices at Risk as a widget. In the configuration, you only need to select the device group of interest.
 -   **Target assets or devices:**  User can select a device/asset or device/asset group. If group is selected, list of devices/assets will be display. If single device/asset selected and enable "Only Child Devices" options then all child devices/assets will be displayed.
     
 -   **Table Settings:**  User can select table inputs such as  id, name, alarms, external id, firmware, availability  front page of tile. User can also select the inputs  to be configured for display.
     
 -   **Default PageSize  :** Select records per page.
     
--   **Page2 Settings:**  User can select up to 5 fields to display in Page2 of tile. 
+-   **Page2 Settings:**  User can select up to 5 fields to display in Page2 of tile. If user selected "Other" as one of the field then one custom field can be configured for display.
     
 -   **Dashboard Navigation Settings (Application Builder Only):**  This feature is available only in application builder. User can navigate to any other dashboard by providing below details:
-    -  **All:**  Select a device type. Navigation will be applied to all the devices/assets of this device/asset to a specific dashboard
+    -  ** **All**:**  Select a device type. Navigation will be applied to all the devices/assets of this device/asset to a specific dashboard
     -   **Dashboard ID:**  Dashboard ID of a dashboard where user need to navigate. You can find dashboard id in browser URL.
     -   **DeviceId as TabGroup:**  Select this option only if you are using Group Template as dashboard in application builder and selected deviceId as tabgroup field during group template configuration.
     -   **TabGroup ID(optional):**  If your dashboard is based on tabgroup then provide tabgroup id.
     -   **Realtime:**  Activate Realtime by default.
-
 **Device at risk On Screen Options:**
 
--   **Attention Required**: Activate this to display devices/assets where attentions is required.
+-  **Attention Required**: Activate this to display devices/assets where attentions is required.
 -   **Realtime**  : On/Off Realtime option.
 -   **Refresh**: Useful for force reload/refresh devices.
 -   **Pagination**: Page navigation options.
