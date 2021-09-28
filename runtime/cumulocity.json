@@ -7,6 +7,11 @@
     "class": "dlt-c8y-icon-exclamation-circle"
   },
   "manifest": {
-    "noAppSwitcher": true
+    "noAppSwitcher": true,
+    "requiredPlatformVersion": "1006.3.0  - 1010.0.8",
+    "version":"1.2.0",
+    "author":"Software AG, Global Presales",
+    "description":"it is designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.",
+    "license": "Apache 2.0"
   }
 }
