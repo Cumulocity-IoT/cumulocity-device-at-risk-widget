@@ -15,9 +15,10 @@ One can also see the Availability of those devices and can also view the data bo
 
 
 ## Installation
+
 ### Runtime Widget Deployment?
 
- - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.0.5/device-at-risk-runtime-widget-1.0.5.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+ - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.0/device-at-risk-runtime-widget-1.2.0.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 ### Installation of widget through App Builder or Cockipt Deployment?
 
