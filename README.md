@@ -56,9 +56,8 @@ One can also see the Availability of those devices and can also view the data bo
     
     ```
     
-2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.0.5/gp-device-at-risk-1.0.5.tgz)**.
-    
-3.  Install the Binary file in app builder.
+2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.0/gp-devices-at-risk-widget-1.2.0.tgz)**.
+3. Install the Binary file in app builder.
     
     ```
     
