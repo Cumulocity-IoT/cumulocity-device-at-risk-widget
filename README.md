@@ -263,7 +263,7 @@ Click on Add Widget and select Devices at Risk as a widget. In the configuration
     -   **DeviceId as TabGroup:**  Select this option only if you are using Group Template as dashboard in application builder and selected deviceId as tabgroup field during group template configuration.
     -   **TabGroup ID(optional):**  If your dashboard is based on tabgroup then provide tabgroup id.
     -   **Realtime:**  Activate Realtime by default.
-    -   
+    
 **Device at risk On Screen Options:**
 
 -   **Realtime**  : On/Off Realtime option.
