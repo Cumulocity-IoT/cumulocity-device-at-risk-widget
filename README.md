@@ -8,10 +8,9 @@ One can also see the Availability of those devices and can also view the data bo
 
 
  ## Features
- - Display Assets/Devices: Displays Assets/Devices for give group in
-   grid mode.
+ - Displays Assets/Devices for given group in grid mode.
  - When you click on the Id it will navigate to that particular dashboard.  
-  - Pagination: Configurable Paginations and option to set default page size.
+ - Pagination: Configurable Paginations and option to set default page size.
 
 
 ## Installation
