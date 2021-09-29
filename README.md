@@ -224,7 +224,7 @@ import { GpDevicesAtRiskWidgetModule } from 'gp-devices-at-risk-widget';
     
     ```
     
-7.  Deploy the app: Follow the  [Installation instructions](https://github.com/SoftwareAG/cumulocity-devices-at-risk-widget#Installation)
+7.  Deploy the app: Follow the  [Installation instructions](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget#Installation).
 
 
 ## QuickStart
