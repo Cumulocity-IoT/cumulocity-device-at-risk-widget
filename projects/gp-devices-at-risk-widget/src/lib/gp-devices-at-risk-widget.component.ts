@@ -15,7 +15,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy, isDevMode } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -90,6 +90,57 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
         }
       }
   async ngOnInit() {
+    if (isDevMode()) {
+      // // config taken from sandbox-ar.eu-latest.cumulocity.com 
+      // this.config = {
+      //   "tProps": [
+      //     "id",
+      //     "name",
+      //     "alarms",
+      //     "availability"
+      //   ],
+      //   "pageSize": 5,
+      //   "dashboardList": [
+      //     {
+      //       "dashboarId": "4391014",
+      //       "tabGroupID": "SAGU 001240 10",
+      //       "type": "Ventilator"
+      //     },
+      //     {
+      //       "dashboarId": "4390797",
+      //       "tabGroupID": "SAGU 001242 12",
+      //       "type": "Cable Drum"
+      //     },
+      //     {
+      //       "dashboarId": "4390859",
+      //       "tabGroupID": "SAGU 001239 8",
+      //       "type": "Van"
+      //     },
+      //     {
+      //       "dashboarId": "4390955",
+      //       "tabGroupID": "SAGU 001241 11",
+      //       "type": "Wooden Pallet"
+      //     },
+      //     {
+      //       "dashboarId": "4391100",
+      //       "tabGroupID": "SAGU 000099 13",
+      //       "type": "Car"
+      //     },
+      //     {
+      //       "dashboarId": "4390861",
+      //       "tabGroupID": "SAGU 523456 5",
+      //       "type": "Digger"
+      //     },
+      //     {
+      //       "type": "All"
+      //     }
+      //   ],
+      //   "device": {
+      //     "id": "4390938"
+      //   }
+      // }
+    }
+
     this.displayedColumns = this.displayedColumns.concat(this.config.tProps ? this.config.tProps : []);
     this.dataSource.data = await this.devicelist.getDeviceList(this.config, this.displayedColumns);
     this.appId = this.devicelist.getAppId();
