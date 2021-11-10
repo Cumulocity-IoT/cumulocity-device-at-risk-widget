@@ -20,7 +20,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { GpDevicesAtRiskWidgetService, Device } from './gp-devices-at-risk-widget.service';
-import { Subject, from } from 'rxjs';
+import { Subject, from, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { InventoryService, Realtime } from '@c8y/ngx-components/api';
 import { GpAlertModalComponent} from './gp-modal/gp-alert-modal.component';
@@ -38,6 +38,7 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
   configDashboardList = [];
   realTimeDeviceSub: object;
   appId = '' ;
+  inventorySubArray = [];
   unsubscribeRealTime$ = new Subject<void>();
   @Input() config: { device: { id: IdReference; }; tProps: ConcatArray<string>; pageSize: any; dashboardList: any; };
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -65,13 +66,14 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
         const devicesAll = response.childAssets.references;
         devicesAll.map(async (device) => {
           // tslint:disable-next-line: deprecation
-          this.inventory.detail$(device.managedObject.id, {
+        const inventorySub = this.inventory.detail$(device.managedObject.id, {
             hot: true,
             realtime: true
           })
           .subscribe((data) => {
              this.manageRealtime(data[0]);
           });
+        this.inventorySubArray.push(inventorySub);
         });
         }
     }
@@ -152,11 +154,22 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribeRealTime$.next();
     this.unsubscribeRealTime$.complete();
+    this.clearSubscriptions();
   }
   async refresh() {
+    this.clearSubscriptions();
+    this.inventorySubArray = [];
     this.dataSource.data = await this.devicelist.getDeviceList(this.config, this.displayedColumns);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  private clearSubscriptions() {
+    if(this.inventorySubArray.length > 0){
+      this.inventorySubArray.forEach( (sub: Subscription) => {
+        sub.unsubscribe();
+      });
+    }
   }
    // Navigate URL to dashboard if dashboard is exist else it will redirect to dialog box to create new Dasboard
 selectedRecord(id: any, deviceType: string ) {

@@ -177,11 +177,7 @@ export class GpDevicesAtRiskWidgetService {
         tabGroup = childDevice.deviceListDynamicDashboards[0].tabGroup;
       }
       if (childDevice.type) { type = childDevice.type; }
-      const identity = await this.identity.list(childDevice.id);
-      if (identity.data.length > 0) {
-        const externalId = identity.data[0].externalId;
-        childDevice.externalId = externalId;
-      }
+      
       let parentCounter = 0;
       if (childDevice.childDevices.references.length > 0) {
 
