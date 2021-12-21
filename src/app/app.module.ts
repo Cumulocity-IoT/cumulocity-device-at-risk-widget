@@ -26,6 +26,7 @@ import { AppStateService, OptionsService } from '@c8y/ngx-components';
 import { AppComponent } from './app.component';
 import { BehaviorSubject } from 'rxjs';
 import { CoreModule } from '@c8y/ngx-components';
+
 import {
   BasicAuth,
   Client,
@@ -51,6 +52,8 @@ import {
   UserRoleService,
   IUser,
   ICurrentTenant} from '@c8y/client';
+  import { NgSelectModule } from '@ng-select/ng-select';
+
 
 const auth = new BasicAuth({
 
@@ -70,6 +73,7 @@ export class MockAppStateService {
   imports: [
     BrowserModule,
     NoopAnimationsModule,
+    NgSelectModule,
     GpDevicesAtRiskWidgetModule,
     RouterModule.forRoot([]),
     CoreModule.forRoot()

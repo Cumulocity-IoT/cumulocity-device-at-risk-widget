@@ -39,7 +39,7 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
   realTimeDeviceSub: object;
   appId = '' ;
   unsubscribeRealTime$ = new Subject<void>();
-  @Input() config: { device: { id: IdReference; }; tProps: ConcatArray<string>; pageSize: any; dashboardList: any; };
+  @Input() config: { device: { id: IdReference; }; pageSize: any; dashboardList: any;  selectedInputs: []};
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
@@ -141,7 +141,8 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
       // }
     }
 
-    this.displayedColumns = this.displayedColumns.concat(this.config.tProps ? this.config.tProps : []);
+    //this.displayedColumns = this.displayedColumns.concat(this.config.tProps ? this.config.tProps : []);
+    this.displayedColumns = this.config.selectedInputs ? this.config.selectedInputs : [];
     this.dataSource.data = await this.devicelist.getDeviceList(this.config, this.displayedColumns);
     this.appId = this.devicelist.getAppId();
     this.configDashboardList = this.config.dashboardList;

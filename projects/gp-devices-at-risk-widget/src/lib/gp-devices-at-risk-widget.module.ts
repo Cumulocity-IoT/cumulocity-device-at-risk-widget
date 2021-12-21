@@ -41,6 +41,7 @@ import { GpAlertModalComponent} from './gp-modal/gp-alert-modal.component';
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,
+    NgSelectModule,
     MatButtonModule,
     MatSlideToggleModule,
     CoreModule,

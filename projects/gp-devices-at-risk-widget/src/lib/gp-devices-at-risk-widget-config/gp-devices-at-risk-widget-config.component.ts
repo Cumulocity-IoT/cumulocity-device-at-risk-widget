@@ -32,8 +32,8 @@ export interface DashboardConfig {
 })
 
 export class GpDevicesAtRiskWidgetConfigComponent implements OnInit {
-  propertiesToDisplay: string[];
-  TableInputs = new FormControl();
+  propertiesToDisplay: any[];
+  selected: any[] = [];
   dashboardList: DashboardConfig[] = [];
   isExpandedDBS = false;
   deviceTypes = null;
@@ -41,7 +41,16 @@ export class GpDevicesAtRiskWidgetConfigComponent implements OnInit {
   constructor(private deviceListService: GpDevicesAtRiskWidgetService) { }
   @Input() config: any = {};
   ngOnInit() {
-    this.propertiesToDisplay = ['id', 'name', 'alarms', 'externalid', 'firmware', 'availability'];
+  //  this.propertiesToDisplay = ['id', 'name', 'alarms', 'externalid', 'firmware', 'availability'];
+
+    this.propertiesToDisplay = [
+      { id: 'id', name: 'ID' },
+      { id: 'name', name: 'Device Name' },
+      { id: 'alarms', name: 'Alarms' },
+      { id: 'externalid', name: 'External Id'},
+      {id: 'firmware', name: 'Firmware'},
+      {id: 'availability', name: 'Availability' }
+  ];
     this.appId = this.deviceListService.getAppId();
     if (!this.config.dashboardList && this.appId) {
       const dashboardObj: DashboardConfig = {};
@@ -58,7 +67,7 @@ export class GpDevicesAtRiskWidgetConfigComponent implements OnInit {
     }
   }
   onColChange() {
-    this.config.tProps = this.TableInputs.value;
+    this.selected = this.config.selectedInputs;
   }
   private getAllDevices() {
     const deviceList: any = null;

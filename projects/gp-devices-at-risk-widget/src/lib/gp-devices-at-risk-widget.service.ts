@@ -86,7 +86,7 @@ export class GpDevicesAtRiskWidgetService {
           });
       });
 
-  }
+  } 
   async getDeviceList(config, displayedColumns) {
     this.alldeviceid = [];
     // Clear array
@@ -104,7 +104,7 @@ export class GpDevicesAtRiskWidgetService {
 
     // Check that the response is a Group and not a device
     if (this.response.hasOwnProperty('c8y_IsDevice')) {
-      alert('Please select a group for this widget to fuction correctly');
+      alert('Please select a group for this widget to function correctly');
     } else {
       // Get List of devices
       this.devicesAll = this.response.childAssets.references;
@@ -117,7 +117,7 @@ export class GpDevicesAtRiskWidgetService {
         const inventory = await this.inventory.detail(device.managedObject.id);
         this.alldeviceid.push(device.managedObject.id);
         const childDevice = inventory.data;
-        // Get External Id
+
         const x = await this.fetchData(childDevice, displayedColumns);
 
         if (x != null) {
@@ -141,10 +141,33 @@ export class GpDevicesAtRiskWidgetService {
     let atRisk = false;
 
     let firmwaredesc = '';
-    if (childDevice) {
+    if (childDevice && displayedColumns.length > 0) {
 
-      displayedColumns.map(async (column) => {
-        if (column === 'firmware') {
+      let dashboardId = '';
+      let tabGroup = '';
+      let type = '';
+      let childdevices1: any = '';
+
+      if (childDevice.deviceListDynamicDashboards && childDevice.deviceListDynamicDashboards.length > 0) {
+        dashboardId = childDevice.deviceListDynamicDashboards[0].dashboardId;
+        tabGroup = childDevice.deviceListDynamicDashboards[0].tabGroup;
+      }
+      if (childDevice.type) {
+         type = childDevice.type; 
+        }
+
+        
+        if (displayedColumns.includes('externalid')) {
+
+          const identity = await this.identity.list(childDevice.id);
+          if (identity.data.length > 0) {
+            const externalId = identity.data[0].externalId;
+            childDevice.externalId = externalId;
+          }
+          
+        }
+
+        if (displayedColumns.includes('firmware')) {
           const firmwareStatus = childDevice.c8y_Firmware;
           let versionIssues = 0;
           if (firmwareStatus && firmwareStatus.version) {
@@ -167,85 +190,123 @@ export class GpDevicesAtRiskWidgetService {
             }
           }
         }
-      });
 
-      let dashboardId = '';
-      let tabGroup = '';
-      let type = '';
-      if (childDevice.deviceListDynamicDashboards && childDevice.deviceListDynamicDashboards.length > 0) {
-        dashboardId = childDevice.deviceListDynamicDashboards[0].dashboardId;
-        tabGroup = childDevice.deviceListDynamicDashboards[0].tabGroup;
-      }
-      if (childDevice.type) { type = childDevice.type; }
-      const identity = await this.identity.list(childDevice.id);
-      if (identity.data.length > 0) {
-        const externalId = identity.data[0].externalId;
-        childDevice.externalId = externalId;
-      }
-      let parentCounter = 0;
-      if (childDevice.childDevices.references.length > 0) {
+        
+        let parentCounter = 0;
+        // Check for child Devices
 
-        const childdevices1 = childDevice.childDevices.references;
 
-        const promises1 = childdevices1.map(async (device) => {
-          const inventory1 = await this.inventory.detail(device.managedObject.id);
-          this.alldeviceid.push(device.managedObject.id);
-          // tslint:disable-next-line: variable-name
-          const child_childDevice = inventory1.data;
-          // Check is Connected or UnConnected
-          // tslint:disable-next-line: max-line-length
-          if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+        if (childDevice.hasOwnProperty('c8y_IsDevice') && (childDevice.childDevices.references.length > 0)) {
 
-            childdeviceAvail = 'AVAILABLE';
-            // tslint:disable-next-line: max-line-length
-          } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'UNAVAILABLE') {
-            childdeviceAvail = 'PARTIAL';
-            // tslint:disable-next-line: max-line-length
-          } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'UNAVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
-            childdeviceAvail = 'PARTIAL';
-          } else {
-            childdeviceAvail = 'UNAVAILABLE';
-          }
+            childdevices1 = childDevice.childDevices.references;
 
-          const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
-          const childactiveAlerts = child_childDevice.c8y_ActiveAlarmsStatus;
-
-          if (activeAlerts !== undefined && parentCounter === 0) {
-            alertDesc += this.getAlertDescription(activeAlerts);
-
-            parentCounter += 1;
-          }
-
-          if (childactiveAlerts !== undefined) {
-            alertDesc += this.getAlertDescription(childactiveAlerts);
-          }
-        });
-        await Promise.all(promises1);
-      } else {
-        if (childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE') {
-          childdeviceAvail = 'AVAILABLE';
-        } else {
-          childdeviceAvail = 'UNAVAILABLE';
+            
+        }
+        else if (childDevice.hasOwnProperty('c8y_IsAsset') && (childDevice.childAssets.references.length > 0)) {
+           childdevices1 = childDevice.childAssets.references;
         }
 
-        if (childDevice.hasOwnProperty('c8y_IsDevice')) {
-          const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
-          alertDesc += this.getAlertDescription(activeAlerts);
-        } else if (childDevice.hasOwnProperty('c8y_IsAsset')) {
-          const activeAlarms = await this.getAlarmsForAsset(childDevice);
-          alertDesc += this.getAlertDescription(activeAlarms);
+        if (childdevices1 != '') {
+          
+        
+          const promises1 = childdevices1.map(async (device) => {
+            const inventory1 = await this.inventory.detail(device.managedObject.id);
+            this.alldeviceid.push(device.managedObject.id);
+            const child_childDevice = inventory1.data;
+
+            if (displayedColumns.includes('availability')) {
+
+              if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+  
+                childdeviceAvail = 'AVAILABLE';
+                // tslint:disable-next-line: max-line-length
+              } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'UNAVAILABLE') {
+                childdeviceAvail = 'PARTIAL';
+                // tslint:disable-next-line: max-line-length
+              } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'UNAVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+                childdeviceAvail = 'PARTIAL';
+              } else {
+                childdeviceAvail = 'UNAVAILABLE';
+              }
+              
+            }
+
+            
+            if (displayedColumns.includes('availability') && childDevice.hasOwnProperty('c8y_IsAsset')) {
+
+              if (child_childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+  
+                childdeviceAvail = 'AVAILABLE';
+              } else {
+                childdeviceAvail = 'UNAVAILABLE';
+              }
+              
+            }
+
+            if (displayedColumns.includes('alarms') && childDevice.hasOwnProperty('c8y_Device')) {
+
+              const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
+              const childactiveAlerts = child_childDevice.c8y_ActiveAlarmsStatus;
+    
+              if (activeAlerts !== undefined && parentCounter === 0) {
+                alertDesc += this.getAlertDescription(activeAlerts);
+    
+                parentCounter += 1;
+              }
+    
+              if (childactiveAlerts !== undefined) {
+                alertDesc += this.getAlertDescription(childactiveAlerts);
+              }
+              
+            }
+
+            
+
+          });
+          await Promise.all(promises1);
+
+          if (displayedColumns.includes('alarms') && childDevice.hasOwnProperty('c8y_IsAsset')) {
+            const activeAlarms = await this.getAlarmsForAsset(childDevice);
+            alertDesc += this.getAlertDescription(activeAlarms);
+          }
+
         }
-      }
+        else{
+
+          if (displayedColumns.includes('availability')) {
+            if (childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE') {
+              childdeviceAvail = 'AVAILABLE';
+            } else {
+              childdeviceAvail = 'NA';
+            }
+
+          }
+
+
+          if (displayedColumns.includes('alarms')) {
+            
+            if (childDevice.hasOwnProperty('c8y_IsDevice')) {
+              const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
+              alertDesc += this.getAlertDescription(activeAlerts);
+            } else if (childDevice.hasOwnProperty('c8y_IsAsset')) {
+              const activeAlarms = await this.getAlarmsForAsset(childDevice);
+              alertDesc += this.getAlertDescription(activeAlarms);
+            }
+          }
+
+
+         
+        }
 
       const temp: Device = {
         id: childDevice.id,
         name: childDevice.name,
         type,
-        alarms: alertDesc,
+        alarms: (alertDesc ? alertDesc : ''),
         firmware: (firmwaredesc ? firmwaredesc : ''),
         connection: (childDevice.c8y_Connection && childDevice.c8y_Connection.status ? childDevice.c8y_Connection.status : ''),
-        availability: childdeviceAvail,
-        externalid: childDevice.externalId,
+        availability: (childdeviceAvail ? childdeviceAvail : ''),
+        externalid: (childDevice.externalId ?childDevice.externalId : ''),
         dashboardId,
         tabGroup
       };
