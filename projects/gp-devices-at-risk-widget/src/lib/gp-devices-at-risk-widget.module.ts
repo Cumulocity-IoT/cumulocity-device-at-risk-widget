@@ -20,7 +20,7 @@ import {CoreModule, HOOK_COMPONENTS} from '@c8y/ngx-components';
 import { GpDevicesAtRiskWidgetComponent } from './gp-devices-at-risk-widget.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+//import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { GpDevicesAtRiskWidgetConfigComponent } from './gp-devices-at-risk-widget-config/gp-devices-at-risk-widget-config.component';
@@ -34,10 +34,9 @@ import { GpAlertModalComponent} from './gp-modal/gp-alert-modal.component';
 
 @NgModule({
   declarations: [GpDevicesAtRiskWidgetComponent, GpDevicesAtRiskWidgetConfigComponent, GpAlertModalComponent],
-
   imports: [
     MatTableModule,
-    MatSortModule,
+    //MatSortModule,
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,

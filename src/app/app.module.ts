@@ -56,9 +56,12 @@ import {
 
 
 const auth = new BasicAuth({
+  user:'',
+  password:'',
+  tenant:''
 
 });
-const client = new Client(auth, '');
+const client = new Client(auth,'');
 client.setAuth(auth);
 const fetchClient = client.core;
 @Injectable()
