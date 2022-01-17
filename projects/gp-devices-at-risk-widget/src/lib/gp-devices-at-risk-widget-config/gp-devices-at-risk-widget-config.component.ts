@@ -15,7 +15,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import { Component, OnInit, Input, ViewEncapsulation, isDevMode} from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, isDevMode, DoCheck} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GpDevicesAtRiskWidgetService } from '../gp-devices-at-risk-widget.service';
 export interface DashboardConfig {
@@ -31,13 +31,14 @@ export interface DashboardConfig {
   encapsulation: ViewEncapsulation.None
 })
 
-export class GpDevicesAtRiskWidgetConfigComponent implements OnInit {
+export class GpDevicesAtRiskWidgetConfigComponent implements OnInit, DoCheck {
   propertiesToDisplay: any[];
   selected: any[] = [];
   dashboardList: DashboardConfig[] = [];
   isExpandedDBS = false;
   deviceTypes = null;
   appId = null;
+  configDevice = null;
   constructor(private deviceListService: GpDevicesAtRiskWidgetService) { }
   @Input() config: any = {};
   ngOnInit() {
@@ -58,20 +59,35 @@ export class GpDevicesAtRiskWidgetConfigComponent implements OnInit {
       this.dashboardList.push(dashboardObj);
       this.config.dashboardList = this.dashboardList;
     }
-    this.getAllDevices();
+    // this.getAllDevices();
+    // if (!this.config.device) {
+    //     this.config.device = {};
+    //   }
     if (!this.config.device) {
-        this.config.device = {};
-      }
+      this.config.device = {};
+    } else {
+    this.configDevice = this.config.device.id;
+    if (this.appId) {
+      this.getAllDevices(this.configDevice);
+    }
+  }
     if (this.config.withTabGroup === undefined) {
       this.config.withTabGroup = false;
     }
   }
+  ngDoCheck(): void {
+    if (this.config.device && this.config.device.id  && this.config.device.id !== this.configDevice) {
+      this.configDevice = this.config.device.id;
+      this.getAllDevices(this.configDevice);
+    }
+  }
+
   onColChange() {
     this.selected = this.config.selectedInputs;
   }
-  private getAllDevices() {
+  private getAllDevices(deviceId: string) {
     const deviceList: any = null;
-    this.deviceListService.getAllDevices(1, deviceList)
+    this.deviceListService.getAllDevices(deviceId,1, deviceList)
       .then((deviceFound) => {
         this.deviceTypes = Array.from(new Set(deviceFound.data.map(item => item.type)));
         this.deviceTypes = this.deviceTypes.filter(n => n);
