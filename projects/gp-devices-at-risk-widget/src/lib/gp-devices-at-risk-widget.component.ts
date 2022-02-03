@@ -24,7 +24,7 @@ import { Subject, from } from 'rxjs';
 import { Router } from '@angular/router';
 import { InventoryService, Realtime } from '@c8y/ngx-components/api';
 import { GpAlertModalComponent} from './gp-modal/gp-alert-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { IdReference } from '@c8y/client';
 @Component({
   selector: 'lib-gp-devices-at-risk-widget',
@@ -65,13 +65,14 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
         const devicesAll = response.childAssets.references;
         devicesAll.map(async (device) => {
           // tslint:disable-next-line: deprecation
-          this.inventory.detail$(device.managedObject.id, {
+          
+         /* this.inventory.detail(device.managedObject.id, {
             hot: true,
             realtime: true
           })
           .subscribe((data) => {
              this.manageRealtime(data[0]);
-          });
+          }); */
         });
         }
     }

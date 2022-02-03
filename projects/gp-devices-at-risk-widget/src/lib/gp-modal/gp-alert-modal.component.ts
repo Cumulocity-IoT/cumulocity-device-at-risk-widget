@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
     selector: 'lib-gp-alert-modal',
     templateUrl: './gp-alert-modal.component.html',
