@@ -16,14 +16,13 @@
 * limitations under the License.
 */
 import { Component, OnInit, Input, ViewChild, OnDestroy, isDevMode } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { GpDevicesAtRiskWidgetService, Device } from './gp-devices-at-risk-widget.service';
 import { Subject, from } from 'rxjs';
 import { Router } from '@angular/router';
 import { InventoryService, Realtime } from '@c8y/ngx-components/api';
-import { GpAlertModalComponent} from './gp-modal/gp-alert-modal.component';
+import { GpAlertModalComponent } from './gp-modal/gp-alert-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { IdReference } from '@c8y/client';
 @Component({
@@ -33,136 +32,197 @@ import { IdReference } from '@c8y/client';
 })
 export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [];
+  totalPages = 0;
+  currentPage = 1;
+  deviceAtRiskData = [];
   dataSource = new MatTableDataSource<Device>([]);
+  allSubscriptions: any = [];
   realtimeState = true;
   configDashboardList = [];
   realTimeDeviceSub: object;
-  appId = '' ;
-  unsubscribeRealTime$ = new Subject<void>();
-  @Input() config: { device: { id: IdReference; }; pageSize: any; dashboardList: any;  selectedInputs: []};
+  appId = '';
+  @Input() config: { device: { id: IdReference; }; pageSize: any; dashboardList: any; selectedInputs: any; withTabGroup: boolean };
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
     private devicelist: GpDevicesAtRiskWidgetService,
     private inventory: InventoryService,
     private router: Router,
-    public realtimeService: Realtime,
+    private realtimeService: Realtime,
     public dialog: MatDialog) { }
-    toggle() {
-      this.realtimeState = !this.realtimeState;
-      if (this.realtimeState) {
-        this.handleReatime();
-      } else {
-        this.unsubscribeRealTime$.next();
-      }
+  
+  toggle() {
+    this.realtimeState = !this.realtimeState;
+    if (this.realtimeState) {
+      this.handleReatime();
+    } else {
+      this.clearSubscriptions();
     }
-    async handleReatime() {
-      const inventory = await this.inventory.detail(this.config.device.id);
-      const response = inventory.data;
-      // Check that the response is a Group and not a device
-      if (response.hasOwnProperty('c8y_IsDevice')) {
-        alert('Please select a group for this widget to fuction correctly'); } else {
-        const devicesAll = response.childAssets.references;
-        devicesAll.map(async (device) => {
-          // tslint:disable-next-line: deprecation
-          
-         /* this.inventory.detail(device.managedObject.id, {
-            hot: true,
-            realtime: true
-          })
-          .subscribe((data) => {
-             this.manageRealtime(data[0]);
-          }); */
+  }
+  async handleReatime() {
+    // Check that the response is a Group and not a device
+    this.deviceAtRiskData.map(async (device) => {
+      const manaogedObjectChannel = `/managedobjects/${device.id}`;
+      const detailSubs = this.realtimeService.subscribe(
+        manaogedObjectChannel,
+        (resp) => {
+
+          const data = (resp.data ? resp.data.data : {});
+          this.manageRealtime(data);
+        }
+      );
+      if (this.realtimeState) {
+        this.allSubscriptions.push({
+          id: device.id,
+          subs: detailSubs,
+          type: 'Realtime',
         });
-        }
-    }
+      } else {
+        this.realtimeService.unsubscribe(detailSubs);
+      }
+    });
+  }
 
-    async manageRealtime(childDevice: { id: string; }) {
-      if (this.realtimeState) {
+  async manageRealtime(childDevice: { id: string; }) {
+    if (this.realtimeState) {
 
-        const tableData = this.dataSource.data.filter(singleDevice => singleDevice.id !== childDevice.id);
-        const x = await this.devicelist.fetchData(childDevice, this.displayedColumns);
-        if ( x != null) {
-          if (x.availability === 'PARTIAL' || x.alarms || x.firmware || x.availability === 'UNAVAILABLE') {
-            tableData.push(x);
-          }
-        }
-        this.dataSource.data = [...tableData];
+      const tableData = this.dataSource.data.filter(singleDevice => singleDevice.id !== childDevice.id);
+      const x = await this.devicelist.fetchData(childDevice, this.displayedColumns);
+      if (x != null) {
+        if (x.availability === 'PARTIAL' || x.alarms || x.firmware || x.availability === 'UNAVAILABLE') {
+          tableData.push(x);
         }
       }
+      this.dataSource.data = [...tableData];
+    }
+  }
   async ngOnInit() {
     if (isDevMode()) {
-      // // config taken from sandbox-ar.eu-latest.cumulocity.com 
-      // this.config = {
-      //   "tProps": [
-      //     "id",
-      //     "name",
-      //     "alarms",
-      //     "availability"
-      //   ],
-      //   "pageSize": 5,
-      //   "dashboardList": [
-      //     {
-      //       "dashboarId": "4391014",
-      //       "tabGroupID": "SAGU 001240 10",
-      //       "type": "Ventilator"
-      //     },
-      //     {
-      //       "dashboarId": "4390797",
-      //       "tabGroupID": "SAGU 001242 12",
-      //       "type": "Cable Drum"
-      //     },
-      //     {
-      //       "dashboarId": "4390859",
-      //       "tabGroupID": "SAGU 001239 8",
-      //       "type": "Van"
-      //     },
-      //     {
-      //       "dashboarId": "4390955",
-      //       "tabGroupID": "SAGU 001241 11",
-      //       "type": "Wooden Pallet"
-      //     },
-      //     {
-      //       "dashboarId": "4391100",
-      //       "tabGroupID": "SAGU 000099 13",
-      //       "type": "Car"
-      //     },
-      //     {
-      //       "dashboarId": "4390861",
-      //       "tabGroupID": "SAGU 523456 5",
-      //       "type": "Digger"
-      //     },
-      //     {
-      //       "type": "All"
-      //     }
-      //   ],
-      //   "device": {
-      //     "id": "4390938"
-      //   }
-      // }
+      // config taken from sandbox
+      /* this.config = {
+          "selectedInputs": [
+             "id",
+             "name",
+             "alarms",
+             "availability"
+         ],
+         "pageSize": 10,
+         "dashboardList": [
+             {
+                 "dashboarId": "8888572",
+                 "tabGroupID": "Air Quality Sensor 001139 01",
+                 "type": "Air Quality Monitor1"
+             },
+             {
+                 "dashboarId": "8888573",
+                 "tabGroupID": "Air Quality Sensor 001140 02",
+                 "type": "Air Quality Monitor2"
+             },
+             {
+                 "dashboarId": "8889241",
+                 "tabGroupID": "Air Quality Sensor 001141 03",
+                 "type": "Air Quality Monitor3"
+             },
+             {
+                 "dashboarId": "8905657",
+                 "tabGroupID": "Air Quality Sensor 001142 04",
+                 "type": "Air Quality Monitor4"
+             },
+             {
+                 "dashboarId": "8888574",
+                 "tabGroupID": "Air Quality Sensor 001143 05",
+                 "type": "Air Quality Monitor5"
+             },
+             {
+                 "dashboarId": "8889243",
+                 "tabGroupID": "Waste Bin 001239 01",
+                 "type": "WasteBin1"
+             },
+             {
+                 "dashboarId": "8889244",
+                 "tabGroupID": "Waste Bin 001240 02",
+                 "type": "WasteBin2"
+             },
+             {
+                 "dashboarId": "8906064",
+                 "tabGroupID": "Waste Bin 001241 03",
+                 "type": "WasteBin3"
+             },
+             {
+                 "dashboarId": "8905660",
+                 "tabGroupID": "Waste Bin 001242 04",
+                 "type": "WasteBin4"
+             },
+             {
+                 "dashboarId": "8906065",
+                 "tabGroupID": "Waste Bin 001243 05",
+                 "type": "WasteBin5"
+             },
+             {
+                 "dashboarId": "8889246",
+                 "tabGroupID": "Eaton SmartMeter1",
+                 "type": "SmartMeter1"
+             },
+             {
+                 "dashboarId": "8889247",
+                 "tabGroupID": "Eaton SmartMeter2",
+                 "type": "SmartMeter2"
+             },
+             {
+                 "dashboarId": "8907037",
+                 "tabGroupID": "Eaton SmartMeter3",
+                 "type": "SmartMeter3"
+             },
+             {
+                 "dashboarId": "8905666",
+                 "tabGroupID": "Eaton SmartMeter4",
+                 "type": "SmartMeter4"
+             },
+             {
+                 "dashboarId": "8907038",
+                 "tabGroupID": "Eaton SmartMeter5",
+                 "type": "SmartMeter5"
+             },
+             {
+                 "dashboarId": "8905667",
+                 "tabGroupID": "Eaton SmartMeter6",
+                 "type": "SmartMeter6"
+             },
+             {
+                 "dashboarId": "8907039",
+                 "tabGroupID": "Eaton SmartMeter7",
+                 "type": "SmartMeter7"
+             },
+             {
+                 "type": "All"
+             }
+         ],
+         "device": {
+             "id": "8905637"
+         },
+         "withTabGroup": false
+      }*/
     }
 
     //this.displayedColumns = this.displayedColumns.concat(this.config.tProps ? this.config.tProps : []);
     this.displayedColumns = this.config.selectedInputs ? this.config.selectedInputs : [];
-    this.dataSource.data = await this.devicelist.getDeviceList(this.config, this.displayedColumns);
+    await this.loadDeviceData();
+    this.pagination();
     this.appId = this.devicelist.getAppId();
     this.configDashboardList = this.config.dashboardList;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.handleReatime();
   }
+
   ngOnDestroy(): void {
-    this.unsubscribeRealTime$.next();
-    this.unsubscribeRealTime$.complete();
+    this.clearSubscriptions();
   }
+
   async refresh() {
-    this.dataSource.data = await this.devicelist.getDeviceList(this.config, this.displayedColumns);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.clearSubscriptions();
+    await this.loadDeviceData();
   }
-   // Navigate URL to dashboard if dashboard is exist else it will redirect to dialog box to create new Dasboard
-selectedRecord(id: any, deviceType: string ) {
+  // Navigate URL to dashboard if dashboard is exist else it will redirect to dialog box to create new Dasboard
+  selectedRecord(id: any, deviceType: string) {
     if (deviceType && this.appId) {
+      console.log(' id', id);
       const dashboardObj = this.configDashboardList.find((dashboard) => dashboard.type === deviceType);
       if (dashboardObj && dashboardObj.dashboarId) {
 
@@ -191,4 +251,34 @@ selectedRecord(id: any, deviceType: string ) {
     });
   }
 
+  pageChanged(pageEvent: any) {
+    this.currentPage = pageEvent.page;
+    this.pagination();
+  }
+
+  private pagination() {
+    const startIndex = (this.currentPage - 1) * this.config.pageSize;
+    const endIndex = (this.currentPage) * this.config.pageSize;
+    this.dataSource.data = this.deviceAtRiskData.filter((record: any, index) => index >= startIndex && index < endIndex);
+    this.dataSource.sort = this.sort;
+  }
+
+  private async loadDeviceData() {
+    this.currentPage = 1;
+    this.deviceAtRiskData = await this.devicelist.getDeviceList(this.config, this.displayedColumns);
+    this.totalPages = this.deviceAtRiskData.length;
+    this.pagination();
+    this.handleReatime();
+  }
+
+  /**
+   * Clear all Realtime subscriptions
+   */
+  private clearSubscriptions() {
+    if (this.allSubscriptions) {
+      this.allSubscriptions.forEach((s) => {
+        this.realtimeService.unsubscribe(s.subs);
+      });
+    }
+  }
 }

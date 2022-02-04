@@ -3,7 +3,7 @@
       <span [ngClass]="realtimeState?'c8y-pulse active' : 'c8y-pulse inactive'" ></span>
       <span >Realtime</span>
     </button>
-    <button mat-icon-button style="color:#1776BF;" type="button" class="button" (click)="refresh()"><span class="fa fa-refresh"></span></button>
+    <button style="color:#1776BF;margin-right: 5px;" type="button" class="btn btn-clean" (click)="refresh()"><i c8yIcon="refresh"></i></button>
   </div>
   <div>
     <table mat-table [dataSource]="dataSource" matSort >
@@ -51,7 +51,7 @@
     </table>
 
   
-    <mat-paginator  [pageSize]="this.config.pageSize" [pageSizeOptions]="[5, 10, 15, 20, 25, 50]" showFirstLastButtons></mat-paginator>
+    <pagination  class="m-t-8 m-r-8 p-b-8 pull-right" previousText=" " nextText=" "  [totalItems]="totalPages" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
   </div>
   
   

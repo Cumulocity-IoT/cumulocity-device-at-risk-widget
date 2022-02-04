@@ -24,7 +24,7 @@
     "@angular/compiler": "~11.1.2",
     "@angular/core": "~11.1.2",
     "@angular/forms": "~11.1.2",
-    "@angular/material": "^11.1.2",
+    "@angular/material": "^11.2.13",
     "@angular/platform-browser": "~11.1.2",
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
@@ -36,9 +36,7 @@
     "@ng-select/ng-select": "^6.1.0"
   },
   "devDependencies": {
-   
-    "@angular-devkit/build-ng-packagr": "~0.803.28",
-    "@angular-devkit/build-angular": "~0.1101.2",
+    "@angular-devkit/build-angular": "~0.1102.18",
     "@angular/cli": "~11.1.2",
     "@angular/cdk": "~11.2.13",
     "@angular/compiler-cli": "~11.1.2",
