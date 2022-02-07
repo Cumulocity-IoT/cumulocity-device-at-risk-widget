@@ -1,6 +1,6 @@
-# Cumulocity Devices at Risk Widget[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.0/device-at-risk-runtime-widget-1.2.0.zip)
+# Cumulocity Devices at Risk Widget[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/device-at-risk-runtime-widget-2.0.0.zip)
 
-This is an Angular 8 widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
+This is an Angular widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
 ![image](https://user-images.githubusercontent.com/89508319/134283066-0d9f412a-98a1-4c47-bcf6-f6c57f7dd136.png)
@@ -17,7 +17,7 @@ One can also see the Availability of those devices and can also view the data bo
 
 ### Runtime Widget Deployment?
 
- - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.0/device-at-risk-runtime-widget-1.2.0.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+ - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/device-at-risk-runtime-widget-2.0.0.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 ### Installation of widget through App Builder or Cockipt Deployment?
 
@@ -55,7 +55,7 @@ One can also see the Availability of those devices and can also view the data bo
     
     ```
     
-2. Grab the Device at risk widget [Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.0/gp-devices-at-risk-widget-1.2.0.tgz)
+2. Grab the Device at risk widget [Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/gp-devices-at-risk-widget-2.0.0.tgz)
 3. Install the Binary file in app builder.
     
     ```
@@ -108,7 +108,7 @@ import { GpDevicesAtRiskWidgetModule } from 'gp-devices-at-risk-widget';
     
     ```
     
-2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.0/gp-devices-at-risk-widget-1.2.0.tgz)
+2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/gp-devices-at-risk-widget-2.0.0.tgz)
 3.  Install the Binary file in your project.
     
     ```
