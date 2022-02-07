@@ -26,13 +26,11 @@ One can also see the Availability of those devices and can also view the data bo
 
  - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/device-at-risk-runtime-widget-2.0.0.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
-### Installation of widget through App Builder or Cockipt Deployment?
+### Installation of widget through App Builder 
 
 **Supported Cumulocity Environments:**
 
  -  **App Builder:**  Tested with Cumulocity App Builder version 1.2.6.
-
--   **Cockpit Application:**  Tested with Cockpit 1009.0.4 with  [Patch Fix](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 **Requirements:**
 -   Git
@@ -101,64 +99,7 @@ import { GpDevicesAtRiskWidgetModule } from 'gp-devices-at-risk-widget';
     
     npm run deploy
 
-    
-   **Installation Steps For Cockpit:**
-
-**Note:**  If you are new to Cockpit or not yet created any cockpit application then please follow  [Web SDK for Angular](https://cumulocity.com/guides/web/angular/)  before proceeding further.
-
-1.  Open Your existing Cockpit/Cumulocity project and install external dependencies by executing below command or install it manually.
-    
-    ```
-    
-    npm i @angular/material@11.1.13 @ng-select/ng-select^6.1.0
-    
-    ```
-    
-2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/gp-devices-at-risk-widget-2.0.0.tgz)
-3.  Install the Binary file in your project.
-    
-    ```
-    npm i <binary file path>/gp-device-at-risk-x.x.x.tgz
-    
-    ```
-    
-4.  Import GpDevicesAtRiskWidgetModule in app.module.ts file located at /cumulocity-app/
-    
-    ```
-    
-    import {GpDevicesAtRiskWidgetModule} from  'gp-device-at-risk';
-    
-    @NgModule({
-    
-    imports: [
-    GpDevicesAtRiskWidgetModule
-    ]
-    })
-    
-5.  Congratulation! Installation is now completed. Now you can run your app locally or build and deploy it into your tenant.
-    
-    ```
-    
-    //Start Cumulocity App
-    
-    
-    
-    npm run start
-    
-    
-    
-    // Build App
-    
-    
-    
-    npm run build
-    
-    
-    // Deploy App
-    
-    
-    
-    npm run deploy
+   
     
    ## Build Instructions
 
