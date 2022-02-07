@@ -1,10 +1,16 @@
-# Cumulocity Devices at Risk Widget[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.1/device-at-risk-runtime-widget-1.2.1.zip)
+# Cumulocity Devices at Risk Widget[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/device-at-risk-runtime-widget-2.0.0.zip)
 
 This is an Angular widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
-![image](https://user-images.githubusercontent.com/89508319/134283066-0d9f412a-98a1-4c47-bcf6-f6c57f7dd136.png)
+### Please choose Device at Risk Widget release based on Cumulocity/Application builder version:
 
+|APPLICATION BUILDER | CUMULOCITY | DEVICE CHART WIDGET |
+|--------------------|------------|---------------------|
+| 1.3.x              | >= 1011.x.x| 2.x.x               |
+| 1.2.x              | 1010.x.x   | 1.x.x               |  
+
+![image](https://user-images.githubusercontent.com/89508319/134283066-0d9f412a-98a1-4c47-bcf6-f6c57f7dd136.png)
 
 
  ## Features
@@ -34,20 +40,13 @@ One can also see the Availability of those devices and can also view the data bo
     
 -   NPM (Included with NodeJS)
 
-### Please choose Device at Risk Widget release based on Cumulocity/Application builder version:
-
-|APPLICATION BUILDER | CUMULOCITY | DEVICE CHART WIDGET |
-|--------------------|------------|---------------------|
-| 1.3.x              | >= 1011.x.x| 2.x.x               |
-| 1.2.x              | 1010.x.x   | 1.x.x               |  
-
 
 **External dependencies:**
 
 ```
-"@angular/material": "^8.2.3"
+"@angular/material": "^11.1.2"
 
-"@ng-select/ng-select": "^3.7.3"
+"@ng-select/ng-select": "^6.1.0"
 
 ```
 
@@ -59,7 +58,7 @@ One can also see the Availability of those devices and can also view the data bo
     
     ```
     
-    npm i @angular/material@8.2.3 @ng-select/ng-select@3.7.3
+    npm i @angular/material@11.1.2 @ng-select/ng-select@6.1.0
     
     ```
     
@@ -103,65 +102,6 @@ import { GpDevicesAtRiskWidgetModule } from 'gp-devices-at-risk-widget';
     npm run deploy
 
     
-   **Installation Steps For Cockpit:**
-
-**Note:**  If you are new to Cockpit or not yet created any cockpit application then please follow  [Web SDK for Angular](https://cumulocity.com/guides/web/angular/)  before proceeding further.
-
-1.  Open Your existing Cockpit/Cumulocity project and install external dependencies by executing below command or install it manually.
-    
-    ```
-    
-    npm i @angular/material@8.2.3 @ng-select/ng-select@3.7.3
-    
-    
-    ```
-    
-2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/gp-devices-at-risk-widget-2.0.0.tgz)
-3.  Install the Binary file in your project.
-    
-    ```
-    npm i <binary file path>/gp-device-at-risk-x.x.x.tgz
-    
-    ```
-    
-4.  Import GpDevicesAtRiskWidgetModule in app.module.ts file located at /cumulocity-app/
-    
-    ```
-    
-    import {GpDevicesAtRiskWidgetModule} from  'gp-device-at-risk';
-    
-    @NgModule({
-    
-    imports: [
-    GpDevicesAtRiskWidgetModule
-    ]
-    })
-    
-5.  Congratulation! Installation is now completed. Now you can run your app locally or build and deploy it into your tenant.
-    
-    ```
-    
-    //Start Cumulocity App
-    
-    
-    
-    npm run start
-    
-    
-    
-    // Build App
-    
-    
-    
-    npm run build
-    
-    
-    // Deploy App
-    
-    
-    
-    npm run deploy
-    
    ## Build Instructions
 
 **Note:**  It is only necessary to follow these instructions if you are modifying/extending this widget, otherwise see the  [Installation Guide](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget#Installation).
@@ -170,7 +110,7 @@ import { GpDevicesAtRiskWidgetModule } from 'gp-devices-at-risk-widget';
 
 -   Git
     
--   NodeJS (release builds are currently built with  `v12.19.0`)
+-   NodeJS (release builds are currently built with  `v14.18.0`)
     
 -   NPM (Included with NodeJS)
     
