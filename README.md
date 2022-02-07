@@ -5,10 +5,10 @@ One can also see the Availability of those devices and can also view the data bo
 
 ### Please choose Device at Risk Widget release based on Cumulocity/Application builder version:
 
-|APPLICATION BUILDER | CUMULOCITY | DEVICE CHART WIDGET |
-|--------------------|------------|---------------------|
-| 1.3.x              | >= 1011.x.x| 2.x.x               |
-| 1.2.x              | 1010.x.x   | 1.x.x               |  
+|APPLICATION BUILDER | CUMULOCITY | DEVICE AT RISK WIDGET |
+|--------------------|------------|-----------------------|
+| 1.3.x              | >= 1011.x.x| 2.x.x                 |
+| 1.2.x              | 1010.x.x   | 1.x.x                 |  
 
 ![ss](https://user-images.githubusercontent.com/89508319/152789197-3f71741d-ba1b-4a92-8edf-60bfda3cdcd6.JPG)
 
