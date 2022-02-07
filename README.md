@@ -17,7 +17,7 @@ One can also see the Availability of those devices and can also view the data bo
 
 ### Runtime Widget Deployment?
 
- - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.1/device-at-risk-runtime-widget-1.2.1.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+ - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/device-at-risk-runtime-widget-2.0.0.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 ### Installation of widget through App Builder or Cockipt Deployment?
 
@@ -33,6 +33,14 @@ One can also see the Availability of those devices and can also view the data bo
 -   NodeJS (release builds are currently built with  `v12.19.0`)
     
 -   NPM (Included with NodeJS)
+
+### Please choose Device at Risk Widget release based on Cumulocity/Application builder version:
+
+|APPLICATION BUILDER | CUMULOCITY | DEVICE CHART WIDGET |
+|--------------------|------------|---------------------|
+| 1.3.x              | >= 1011.x.x| 2.x.x               |
+| 1.2.x              | 1010.x.x   | 1.x.x               |  
+
 
 **External dependencies:**
 
@@ -55,7 +63,7 @@ One can also see the Availability of those devices and can also view the data bo
     
     ```
     
-2. Grab the Device at risk widget [Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.1/gp-devices-at-risk-widget-1.2.1.tgz)
+2. Grab the Device at risk widget [Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/gp-devices-at-risk-widget-2.0.0.tgz)
 3. Install the Binary file in app builder.
     
     ```
@@ -108,7 +116,7 @@ import { GpDevicesAtRiskWidgetModule } from 'gp-devices-at-risk-widget';
     
     ```
     
-2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/1.2.1/gp-devices-at-risk-widget-1.2.1.tgz)
+2.  Grab the Device at risk widget  **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/gp-devices-at-risk-widget-2.0.0.tgz)
 3.  Install the Binary file in your project.
     
     ```
