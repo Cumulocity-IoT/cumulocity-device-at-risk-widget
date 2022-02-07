@@ -25,13 +25,12 @@ One can also see the Availability of those devices and can also view the data bo
 
  - This widget support runtime deployment. Download  [Runtime Binary](https://github.com/SoftwareAG/cumulocity-device-at-risk-widget/releases/download/2.0.0/device-at-risk-runtime-widget-2.0.0.zip)  and follow runtime deployment instructions from  [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
-### Installation of widget through App Builder or Cockipt Deployment?
+### Installation of widget through App Builder 
 
 **Supported Cumulocity Environments:**
 
  -  **App Builder:**  Tested with Cumulocity App Builder version 1.2.6.
 
--   **Cockpit Application:**  Tested with Cockpit 1009.0.4 with  [Patch Fix](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 **Requirements:**
 -   Git
