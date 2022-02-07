@@ -42,9 +42,9 @@ One can also see the Availability of those devices and can also view the data bo
 **External dependencies:**
 
 ```
-"@angular/material": "^8.2.3"
+"@angular/material": "^11.1.13"
 
-"@ng-select/ng-select": "^3.7.3"
+"@ng-select/ng-select": "^6.1.0"
 
 ```
 
