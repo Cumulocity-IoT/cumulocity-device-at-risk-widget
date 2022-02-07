@@ -10,7 +10,7 @@ One can also see the Availability of those devices and can also view the data bo
 | 1.3.x              | >= 1011.x.x| 2.x.x               |
 | 1.2.x              | 1010.x.x   | 1.x.x               |  
 
-![image](https://user-images.githubusercontent.com/89508319/134283066-0d9f412a-98a1-4c47-bcf6-f6c57f7dd136.png)
+![image](https://user-images.githubusercontent.com/89508319/152788480-bb32221c-bbe8-495e-adba-667f23d3202e.png)
 
 
  ## Features
