@@ -1,11 +1,11 @@
 {
   "name": "gp-devices-at-risk-widget",
-  "version": "1.2.1",
-  "description": "it is designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.",
+  "version": "2.0.0",
+  "description": "This is an Angular widget, it is designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.",
   "author": "Sabreen Irfana - Software AG, Global Presales",
   "license": "Apache 2.0",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
+    "@angular/common": "^11.1.2",
+    "@angular/core": "^11.1.2"
   }
 }

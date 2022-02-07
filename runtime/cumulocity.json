@@ -8,8 +8,8 @@
   },
   "manifest": {
     "noAppSwitcher": true,
-    "requiredPlatformVersion": "1006.3.0  - 1010.0.8",
-    "version":"1.2.0",
+    "requiredPlatformVersion": ">=1011.0.0",
+    "version":"2.0.0",
     "author":"Software AG, Global Presales",
     "description":"it is designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.",
     "license": "Apache 2.0"

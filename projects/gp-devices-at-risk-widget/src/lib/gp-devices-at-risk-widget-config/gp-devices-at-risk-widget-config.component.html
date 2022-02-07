@@ -1,14 +1,24 @@
 <div class="form-group">
-  <c8y-form-group>
+  
     <label >Table settings 
       <span title="Properties selected are displayed."><i class="fa fa-question-circle"></i></span>
     </label>
-    <mat-form-field>
-      <mat-label>TableInputs</mat-label>
-      <mat-select placeholder="Select properties" (selectionChange)="onColChange()" [formControl]="TableInputs" multiple>
-        <mat-option *ngFor="let TableInputs of propertiesToDisplay" [value]="TableInputs">{{TableInputs}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+
+
+    <ng-container>
+      <label>Table Inputs </label>    
+        <ng-container>
+          <ng-select [items]="propertiesToDisplay" [multiple]="true" bindLabel="name"
+                     bindValue="id"
+                     [closeOnSelect]="false"
+                     [(ngModel)]="config.selectedInputs"
+                     (ngModelChange)="onColChange()"
+                     placeHolder = 'select Table Fields'>
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}}
+              </ng-template>
+          </ng-select>
+        </ng-container>
     <div class="form-group">
       <label translate>Default PageSize</label>
       <input class="form-control" type="number" min="1" name="config.pageSize" style="width:50%" [(ngModel)]="config.pageSize">
@@ -47,6 +57,4 @@
         </div>
       </div>
     </div>
-  </div>
-  </c8y-form-group>
 </div>

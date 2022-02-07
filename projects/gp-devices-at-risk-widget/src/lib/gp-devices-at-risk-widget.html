@@ -3,12 +3,12 @@
       <span [ngClass]="realtimeState?'c8y-pulse active' : 'c8y-pulse inactive'" ></span>
       <span >Realtime</span>
     </button>
-    <button mat-icon-button style="color:#1776BF;" type="button" class="button" (click)="refresh()"><span class="fa fa-refresh"></span></button>
+    <button style="color:#1776BF;margin-right: 5px;" type="button" class="btn btn-clean" (click)="refresh()"><i c8yIcon="refresh"></i></button>
   </div>
   <div>
     <table mat-table [dataSource]="dataSource" matSort >
   
-      <!-- Position Column -->  
+      <!-- Id Column -->  
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
         <td mat-cell *matCellDef="let element" style="cursor: pointer;"><a><span (click)="selectedRecord(element.id,element.type)"> {{element.id}} </span></a></td>
@@ -32,24 +32,26 @@
         <td mat-cell *matCellDef="let element"> {{element.externalid}} </td>
       </ng-container>
   
-      <!-- Connection Column -->
+      <!-- firmware Column -->
       <ng-container matColumnDef="firmware">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Firmware </th>
         <td mat-cell *matCellDef="let element"> {{element.firmware}} </td>
       </ng-container>
   
-      <!-- Location Column -->
+      <!-- availability Column -->
       <ng-container matColumnDef="availability">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
         <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
       </ng-container>
-  
+
+
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
   
-    <mat-paginator  [pageSize]="this.config.pageSize" [pageSizeOptions]="[5, 10, 15, 20, 25, 50]" showFirstLastButtons></mat-paginator>
+    <pagination  class="m-t-8 m-r-8 p-b-8 pull-right" previousText=" " nextText=" "  [totalItems]="totalPages" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
   </div>
   
   
