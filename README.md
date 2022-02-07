@@ -3,7 +3,7 @@
 This is an Angular widget designed to get a list of devices based on a group selection and display any device that has a Critical/Major Alarm or Medium/High-Risk Firmware raised against it.
 One can also see the Availability of those devices and can also view the data both in Real-time/offline mode.
 
-### Please choose Device at Risk Widget release based on Cumuloicty/Application builder version:
+### Please choose Device at Risk Widget release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | DEVICE CHART WIDGET |
 |--------------------|------------|---------------------|
