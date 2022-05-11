@@ -24,9 +24,9 @@ import { InventoryService, AlarmService, Realtime } from '@c8y/ngx-components/ap
 export class GpDevicesAtRiskWidgetService {
 
   constructor(public inventory: InventoryService,
-              public identity: IdentityService,
-              public realtimeService: Realtime,
-              private alarmService: AlarmService
+    public identity: IdentityService,
+    public realtimeService: Realtime,
+    private alarmService: AlarmService
   ) { }
 
   // Variables
@@ -153,150 +153,150 @@ export class GpDevicesAtRiskWidgetService {
         tabGroup = childDevice.deviceListDynamicDashboards[0].tabGroup;
       }
       if (childDevice.type) {
-         type = childDevice.type;
-        }
+        type = childDevice.type;
+      }
 
 
       if (displayedColumns.includes('externalid')) {
 
-          const identity = await this.identity.list(childDevice.id);
-          if (identity.data.length > 0) {
-            const externalId = identity.data[0].externalId;
-            childDevice.externalId = externalId;
-          }
-
+        const identity = await this.identity.list(childDevice.id);
+        if (identity.data.length > 0) {
+          const externalId = identity.data[0].externalId;
+          childDevice.externalId = externalId;
         }
+
+      }
 
       if (displayedColumns.includes('firmware')) {
-          const firmwareStatus = childDevice.c8y_Firmware;
-          let versionIssues = 0;
-          if (firmwareStatus && firmwareStatus.version) {
-            versionIssues = firmwareStatus.version - this.latestFirmwareVersion;
-          }
-          if (versionIssues < 0) {
-            atRisk = true;
-          }
-          if (atRisk) {
-            if (atRisk) {
-              if (versionIssues >= 0) {
-                firmwaredesc = 'No Risk';
-              } else if (versionIssues === -1) {
-                firmwaredesc = 'Low Risk';
-              } else if (versionIssues === -2) {
-                firmwaredesc = 'Medium Risk';
-              } else if (versionIssues <= -3) {
-                firmwaredesc = 'High Risk';
-              }
-            }
-          }
+        const firmwareStatus = childDevice.c8y_Firmware;
+        let versionIssues = 0;
+        if (firmwareStatus && firmwareStatus.version) {
+          versionIssues = firmwareStatus.version - this.latestFirmwareVersion;
         }
+        if (versionIssues < 0) {
+          atRisk = true;
+        }
+        if (atRisk) {
+          if (versionIssues >= 0) {
+            firmwaredesc = 'No Risk';
+          } else if (versionIssues === -1) {
+            firmwaredesc = 'Low Risk';
+          } else if (versionIssues === -2) {
+            firmwaredesc = 'Medium Risk';
+          } else if (versionIssues <= -3) {
+            firmwaredesc = 'High Risk';
+          }
+        } else {
+          firmwaredesc = 'No Risk';
+        }
+      }
 
       let parentCounter = 0;
-        // Check for child Devices
+      // Check for child Devices
 
 
       if (childDevice.hasOwnProperty('c8y_IsDevice') && (childDevice.childDevices.references.length > 0)) {
 
-            childdevices1 = childDevice.childDevices.references;
+        childdevices1 = childDevice.childDevices.references;
 
 
-        } else if (childDevice.hasOwnProperty('c8y_IsAsset') && (childDevice.childAssets.references.length > 0)) {
-           childdevices1 = childDevice.childAssets.references;
-        }
+      } else if (childDevice.hasOwnProperty('c8y_IsAsset') && (childDevice.childAssets.references.length > 0)) {
+        childdevices1 = childDevice.childAssets.references;
+      }
 
       // tslint:disable-next-line: triple-equals
       if (childdevices1 != '') {
 
 
-          const promises1 = childdevices1.map(async (device) => {
-            const inventory1 = await this.inventory.detail(device.managedObject.id);
-            this.alldeviceid.push(device.managedObject.id);
-            // tslint:disable-next-line: variable-name
-            const child_childDevice = inventory1.data;
+        const promises1 = childdevices1.map(async (device) => {
+          const inventory1 = await this.inventory.detail(device.managedObject.id);
+          this.alldeviceid.push(device.managedObject.id);
+          // tslint:disable-next-line: variable-name
+          const child_childDevice = inventory1.data;
 
-            if (displayedColumns.includes('availability')) {
+          if (displayedColumns.includes('availability')) {
 
+            // tslint:disable-next-line: max-line-length
+            if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+
+              childdeviceAvail = 'AVAILABLE';
               // tslint:disable-next-line: max-line-length
-              if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
-
-                childdeviceAvail = 'AVAILABLE';
-                // tslint:disable-next-line: max-line-length
-              } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'UNAVAILABLE') {
-                childdeviceAvail = 'PARTIAL';
-                // tslint:disable-next-line: max-line-length
-              } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'UNAVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
-                childdeviceAvail = 'PARTIAL';
-              } else {
-                childdeviceAvail = 'UNAVAILABLE';
-              }
-
+            } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE' && child_childDevice.c8y_Availability.status === 'UNAVAILABLE') {
+              childdeviceAvail = 'PARTIAL';
+              // tslint:disable-next-line: max-line-length
+            } else if (childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'UNAVAILABLE' && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+              childdeviceAvail = 'PARTIAL';
+            } else {
+              childdeviceAvail = 'UNAVAILABLE';
             }
 
+          }
 
-            if (displayedColumns.includes('availability') && childDevice.hasOwnProperty('c8y_IsAsset')) {
 
-              if (child_childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
+          if (displayedColumns.includes('availability') && childDevice.hasOwnProperty('c8y_IsAsset')) {
 
-                childdeviceAvail = 'AVAILABLE';
-              } else {
-                childdeviceAvail = 'UNAVAILABLE';
-              }
+            if (child_childDevice.hasOwnProperty('c8y_Availability') && child_childDevice.c8y_Availability.status === 'AVAILABLE') {
 
+              childdeviceAvail = 'AVAILABLE';
+            } else {
+              childdeviceAvail = 'UNAVAILABLE';
             }
 
-            if (displayedColumns.includes('alarms') && childDevice.hasOwnProperty('c8y_Device')) {
+          }
 
-              const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
-              const childactiveAlerts = child_childDevice.c8y_ActiveAlarmsStatus;
+          if (displayedColumns.includes('alarms') && childDevice.hasOwnProperty('c8y_IsDevice')) {
 
-              if (activeAlerts !== undefined && parentCounter === 0) {
-                alertDesc += this.getAlertDescription(activeAlerts);
+            const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
+            const childactiveAlerts = child_childDevice.c8y_ActiveAlarmsStatus;
 
-                parentCounter += 1;
-              }
+            if (activeAlerts !== undefined && parentCounter === 0) {
+              alertDesc += this.getAlertDescription(activeAlerts);
 
-              if (childactiveAlerts !== undefined) {
-                alertDesc += this.getAlertDescription(childactiveAlerts);
-              }
-
+              parentCounter += 1;
             }
 
+            if (childactiveAlerts !== undefined) {
+              alertDesc += this.getAlertDescription(childactiveAlerts);
+            }
+
+          }
 
 
-          });
-          await Promise.all(promises1);
 
-          if (displayedColumns.includes('alarms') && childDevice.hasOwnProperty('c8y_IsAsset')) {
+        });
+        await Promise.all(promises1);
+
+        if (displayedColumns.includes('alarms') && childDevice.hasOwnProperty('c8y_IsAsset')) {
+          const activeAlarms = await this.getAlarmsForAsset(childDevice);
+          alertDesc += this.getAlertDescription(activeAlarms);
+        }
+
+      } else {
+
+        if (displayedColumns.includes('availability')) {
+          if (childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE') {
+            childdeviceAvail = 'AVAILABLE';
+          } else {
+            childdeviceAvail = 'UNAVAILABLE';
+          }
+
+        }
+
+
+        if (displayedColumns.includes('alarms')) {
+
+          if (childDevice.hasOwnProperty('c8y_IsDevice')) {
+            const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
+            alertDesc += this.getAlertDescription(activeAlerts);
+          } else if (childDevice.hasOwnProperty('c8y_IsAsset')) {
             const activeAlarms = await this.getAlarmsForAsset(childDevice);
             alertDesc += this.getAlertDescription(activeAlarms);
           }
-
-        } else {
-
-          if (displayedColumns.includes('availability')) {
-            if (childDevice.hasOwnProperty('c8y_Availability') && childDevice.c8y_Availability.status === 'AVAILABLE') {
-              childdeviceAvail = 'AVAILABLE';
-            } else {
-              childdeviceAvail = 'NA';
-            }
-
-          }
-
-
-          if (displayedColumns.includes('alarms')) {
-
-            if (childDevice.hasOwnProperty('c8y_IsDevice')) {
-              const activeAlerts = childDevice.c8y_ActiveAlarmsStatus;
-              alertDesc += this.getAlertDescription(activeAlerts);
-            } else if (childDevice.hasOwnProperty('c8y_IsAsset')) {
-              const activeAlarms = await this.getAlarmsForAsset(childDevice);
-              alertDesc += this.getAlertDescription(activeAlarms);
-            }
-          }
-
-
-
         }
+
+
+
+      }
 
       const temp: Device = {
         id: childDevice.id,
