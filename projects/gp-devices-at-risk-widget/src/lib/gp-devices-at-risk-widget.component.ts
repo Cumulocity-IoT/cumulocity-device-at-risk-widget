@@ -25,6 +25,7 @@ import { InventoryService, Realtime } from '@c8y/ngx-components/api';
 import { GpAlertModalComponent } from './gp-modal/gp-alert-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { IdReference } from '@c8y/client';
+import { ɵangular_packages_animations_browser_browser_a } from '@angular/animations/browser';
 @Component({
   selector: 'lib-gp-devices-at-risk-widget',
   templateUrl: 'gp-devices-at-risk-widget.html',
@@ -41,7 +42,13 @@ export class GpDevicesAtRiskWidgetComponent implements OnInit, OnDestroy {
   configDashboardList = [];
   realTimeDeviceSub: object;
   appId = '';
-  @Input() config: { device: { id: IdReference; }; pageSize: any; dashboardList: any; selectedInputs: any; withTabGroup: boolean };
+  @Input() config: { 
+    device: { id: IdReference; }; 
+    pageSize: any; 
+    dashboardList: any; 
+    selectedInputs: any; 
+    withTabGroup: boolean;
+  };
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(
     private devicelist: GpDevicesAtRiskWidgetService,

@@ -1,12 +1,12 @@
 <div style ="float: right; margin-right: 10px;">
-    <button type="button" class="btn btn-link c8y-realtime" title="Toggle realtime" (click)="toggle()" >
+    <button type="button" class="btn btn-link c8y-realtime btnTheme" title="Toggle realtime" (click)="toggle()" >
       <span [ngClass]="realtimeState?'c8y-pulse active' : 'c8y-pulse inactive'" ></span>
       <span >Realtime</span>
     </button>
     <button style="color:#1776BF;margin-right: 5px;" type="button" class="btn btn-clean" (click)="refresh()"><i c8yIcon="refresh"></i></button>
   </div>
   <div>
-    <table mat-table [dataSource]="dataSource" matSort >
+    <table mat-table [dataSource]="dataSource" matSort class="tableTheme">
   
       <!-- Id Column -->  
       <ng-container matColumnDef="id">
@@ -23,7 +23,7 @@
       <ng-container matColumnDef="alarms">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Alarms </th>
         <!-- <td mat-cell *matCellDef="let element"> {{element.alarms}} </td> -->
-        <td class = "display-text-status-orange" mat-cell *matCellDef="let element" [ngClass]="{'display-text-status-red': element.alarms === 'Critical(1)'}">{{element.alarms}}</td>
+        <td mat-cell *matCellDef="let element" [ngClass]="element.alarms === 'Critical(1)' ? 'display-text-status-red': 'display-text-status-orange'">{{element.alarms}}</td>
       </ng-container>
   
       <!-- External Id -->

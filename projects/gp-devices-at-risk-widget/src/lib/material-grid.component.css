@@ -6,18 +6,47 @@ th.mat-sort-header-sorted {
     color: black;
 }
 
-tr.mat-row{
+tr.mat-row {
     height: 30px;
 }
-.paginatorPosition
-{
-   
+
+.paginatorPosition {
+
     bottom: 10px;
     right: 5px;
 }
-.display-text-status-orange{
-    color:orange
-  }
-  .display-text-status-red {
+
+.display-text-status-orange {
+    color: orange
+}
+
+.display-text-status-red {
     color: red
-  }
+}
+
+.tableTheme {
+    background-color: var(--component-background,#fff);
+}
+.tableTheme th.mat-header-cell {
+    color: var(--component-label-color,#333);
+}
+.tableTheme td.mat-cell {
+    color: var(--component-color,#000);
+}
+.tableTheme td.display-text-status-red {
+    color: red;
+}
+.tableTheme td.display-text-status-orange {
+    color: orange;
+}
+table a {
+    color: var(--navigator-active-bg) ;
+}
+
+table a:hover {
+    color: var(--navigator-active-bg) ;
+}
+
+.btnTheme {
+    color: var(--component-color,#000);
+}
