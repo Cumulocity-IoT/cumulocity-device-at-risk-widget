@@ -40,11 +40,11 @@ tr.mat-row {
     color: orange;
 }
 table a {
-    color: #1776bf;
+    color: var(--component-link-color);
 }
 
 table a:hover {
-    color: #1776bf ;
+    color: var(--component-link-color-hover);
 }
 
 .btnTheme {
